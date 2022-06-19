@@ -28,6 +28,7 @@ export class LoginPage implements OnInit {
   async onSubmit() {
     this.store.dispatch(set({isAuthenticated: true}));
     this.router.navigate(['/']);
+    this.form.reset();
   }
 
 }
