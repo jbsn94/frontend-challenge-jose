@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Holidays</ion-title>
+    <ion-buttons slot="end">
+      <ion-button id="trigger-button-calendar">
+        <ion-icon name="calendar-clear-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-breadcrumbs>
+    <ion-breadcrumb>
+      <ion-icon slot="start" name="globe-outline"></ion-icon>
+      {{country?.code}} - {{country?.name}}
+    </ion-breadcrumb>
+    <ion-breadcrumb>
+      <ion-icon slot="start" name="calendar-clear-outline"></ion-icon>
+      {{year}}
+    </ion-breadcrumb>
+  </ion-breadcrumbs>
+
+  <ion-card *ngFor="let holiday of holidays">
+    <ion-card-header>
+      <ion-card-title>{{holiday.name}}</ion-card-title>
+      <ion-card-subtitle>{{formatDate(holiday.date)}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col><b>Local name</b></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>{{holiday.local_name}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col><b>Regions</b></ion-col>
+          <ion-col><b>Types</b></ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-row>
+        <ion-col>{{holiday.regions.join(',')}}</ion-col>
+        <ion-col>{{holiday.types.join(',')}}</ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-popover trigger="trigger-button-calendar">
+    <ng-template>
+      <ion-content>
+        <ion-datetime presentation="year" [value]="year" (ionChange)="dateChanged($event)"></ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+</ion-content>

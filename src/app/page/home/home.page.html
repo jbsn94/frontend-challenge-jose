@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Countries
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <cdk-virtual-scroll-viewport itemSize="10">
+    <ion-list lines="full">
+      <ion-item detail button *cdkVirtualFor="let country of countries" (click)="goToDetail(country.code)">
+        <ion-note slot="start">{{country.code}}</ion-note>
+        <ion-label>{{country.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </cdk-virtual-scroll-viewport>
+</ion-content>

@@ -1,0 +1,39 @@
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">E-mail</ion-label>
+            <ion-input type="email" formControlName="login"></ion-input>
+            <ng-container *ngIf="form.get('login')?.dirty || this.form.get('login').touched">
+              <ion-text slot="error">
+                <ng-container *ngIf="form.get('login')?.errors?.['required']">
+                  This field is required.
+                </ng-container>
+                <ng-container *ngIf="form.get('login')?.errors?.['email']">
+                  This is not a valid email.
+                </ng-container>
+              </ion-text>
+            </ng-container>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" formControlName="password" required></ion-input>
+            <ng-container *ngIf="form.get('password')?.dirty || this.form.get('password').touched">
+              <ion-text slot="error">
+                <ng-container *ngIf="form.get('password')?.errors?.['required']">
+                  This field is required.
+                </ng-container>
+                <ng-container *ngIf="form.get('password')?.errors?.['minlength']">
+                  The password need to have 6 characters.
+                </ng-container>
+              </ion-text>
+            </ng-container>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">Login</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
